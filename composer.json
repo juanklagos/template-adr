@@ -1,14 +1,21 @@
 {
-    "name": "laravel/laravel",
+    "name": "juanklagos/laravel-template-adr",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [
         "framework",
         "laravel"
     ],
+    "authors": [
+        {
+            "name": "Juan Carlos Alvarez",
+            "email": "jcalvarez31@misena.edu.co"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "ext-json": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
