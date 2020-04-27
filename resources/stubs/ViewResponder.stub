@@ -1,0 +1,15 @@
+<?php
+
+namespace ADR\{{domainName}}\Responder\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Resources\{{modelName}}Resource;
+use App\Domain\Interfaces\ResponderInterface;
+use App\Responder\BaseResponder;
+
+class {{modelName}}ViewResponder extends BaseResponder implements ResponderInterface
+{
+    public function respond()
+    {
+        return new {{modelName}}Resource($this->response->getData());
+    }
+}

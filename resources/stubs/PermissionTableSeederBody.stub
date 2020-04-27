@@ -1,0 +1,23 @@
+
+    private function set{{modelName}}Permissions()
+    {
+        $index = Permission::firstOrCreate(['name' => Permission::{{modelPluralSnakeUpperCase}}_INDEX]);
+        $create = Permission::firstOrCreate(['name' => Permission::{{modelPluralSnakeUpperCase}}_STORE]);
+        $update = Permission::firstOrCreate(['name' => Permission::{{modelPluralSnakeUpperCase}}_UPDATE]);
+        $destroy = Permission::firstOrCreate(['name' => Permission::{{modelPluralSnakeUpperCase}}_DESTROY]);
+
+        $this->root->givePermissionTo([
+            $index,
+            $create,
+            $update,
+            $destroy,
+        ]);
+
+        $this->admin->givePermissionTo([
+            $index,
+            $create,
+            $update,
+            $destroy,
+        ]);
+    }
+/*BODY*/

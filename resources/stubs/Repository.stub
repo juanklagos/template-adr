@@ -1,0 +1,25 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Repositories;
+
+use ADR\{{domainName}}\Domain\Entities\{{modelName}};
+use Prettus\Repository\Eloquent\BaseRepository;
+use ADR\{{domainName}}\Domain\Interfaces\Repositories\{{modelName}}Repository;
+
+/**
+ * Class {{modelName}}RepositoryEloquent.
+ *
+ * @package namespace ADR\{{domainName}}\Domain\Repositories;
+ */
+class {{modelName}}RepositoryEloquent extends BaseRepository implements {{modelName}}Repository
+{
+    /**
+     * Specify Model class name
+     *
+     * @return string
+     */
+    public function model()
+    {
+        return {{modelName}}::class;
+    }
+}

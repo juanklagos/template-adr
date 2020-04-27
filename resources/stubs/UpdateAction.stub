@@ -1,0 +1,66 @@
+<?php
+
+namespace ADR\{{domainName}}\Action\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Services\{{modelName}}\{{modelName}}UpdateService;
+use ADR\{{domainName}}\Responder\{{modelName}}\{{modelName}}UpdateResponder;
+use ADR\Permission\Domain\Entities\Permission;
+use Illuminate\Http\Request;
+use Lorisleiva\Actions\Action;
+
+class {{modelName}}UpdateAction extends Action
+{
+    public function authorize()
+    {
+        return $this->user()->can(Permission::{{modelPluralSnakeUpperCase}}_UPDATE);
+    }
+
+    public function rules()
+    {
+        return [];
+    }
+
+    /**
+     * @param {{modelName}}UpdateService $service
+     * @param {{modelName}}UpdateResponder $responder
+     * @param Request $request
+     * @return \ADR\{{domainName}}\Domain\Resources\{{modelName}}Resource|\Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @OA\Put(
+     *     path="{{modelPluralSlug}}/{{{modelSingularSnake}}}",
+     *     summary="Update {{modelName}}",
+     *     operationId="put{{modelName}}",
+     *     tags={"{{modelPlural}}"},
+     *     @OA\Parameter(
+     *         name="{{modelSingularSnake}}",
+     *         in="path",
+     *         description="{{modelSingularSnake}} id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/{{modelName}}Resource"
+     *         ),
+     *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/{{modelName}}"},
+     *     security={
+     *        {"passport": {}},
+     *     },
+     * )
+     */
+    public function handle(
+        {{modelName}}UpdateService $service,
+        {{modelName}}UpdateResponder $responder,
+        Request $request
+    ) {
+        ${{modelSingularCamel}} = $service->handle($this->validated(), $request->{{modelSingularSnake}});
+        return $responder->withResponse(${{modelSingularCamel}})->respond();
+    }
+}

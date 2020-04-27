@@ -1,0 +1,60 @@
+<?php
+
+namespace ADR\{{domainName}}\Action\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Services\{{modelName}}\{{modelName}}DestroyService;
+use ADR\{{domainName}}\Responder\{{modelName}}\{{modelName}}DestroyResponder;
+use ADR\Permission\Domain\Entities\Permission;
+use Illuminate\Http\Request;
+use Lorisleiva\Actions\Action;
+
+class {{modelName}}DestroyAction extends Action
+{
+    public function authorize()
+    {
+        return $this->user()->can(Permission::{{modelPluralSnakeUpperCase}}_DESTROY);
+    }
+
+    public function rules()
+    {
+        return [];
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @OA\Delete(
+     *     path="{{modelPluralSlug}}/{{{modelSingularSnake}}}",
+     *     summary="Delete {{modelName}}",
+     *     operationId="destroy{{modelName}}",
+     *     tags={"{{modelPlural}}"},
+     *     @OA\Parameter(
+     *         name="{{modelSingularSnake}}",
+     *         in="path",
+     *         description="{{modelSingularSnake}} id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="No content"
+     *     ),
+     *     security={
+     *        {"passport": {}},
+     *     },
+     * )
+     */
+    public function handle(
+        {{modelName}}DestroyService $service,
+        {{modelName}}DestroyResponder $responder,
+        Request $request
+    ) {
+        $service->handle($this->validated(), $request->{{modelSingularSnake}});
+        return $responder->respond();
+    }
+}

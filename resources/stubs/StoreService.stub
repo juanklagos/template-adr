@@ -1,0 +1,52 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Services\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Interfaces\Repositories\{{modelName}}Repository;
+use ADR\{{domainName}}\Domain\Validators\{{modelName}}Validator;
+use App\Domain\Interfaces\ServiceInterface;
+use App\Domain\Payloads\SuccessPayload;
+use App\Domain\Payloads\ValidationFailedPayload;
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class {{modelName}}StoreService implements ServiceInterface
+{
+    protected ${{modelSingularCamel}}Repository;
+    protected ${{modelSingularCamel}}Validator;
+
+    public function __construct({{modelName}}Repository ${{modelSingularCamel}}Repository, {{modelName}}Validator ${{modelSingularCamel}}Validator)
+    {
+        $this->{{modelSingularCamel}}Repository = ${{modelSingularCamel}}Repository;
+        $this->{{modelSingularCamel}}Validator = ${{modelSingularCamel}}Validator;
+    }
+
+    public function handle($attributes = [], int $id = null)
+    {
+        $resolver = new OptionsResolver();
+        $this->configureAttributes($resolver, $attributes);
+        $attributes = $resolver->resolve($attributes);
+
+        $validator = $this->validate($attributes);
+        if (!$validator->passes(ValidatorInterface::RULE_CREATE)) {
+            return new ValidationFailedPayload($validator->errorsBag()->getMessages());
+        }
+
+        ${{modelSingularCamel}} = $this->{{modelSingularCamel}}Repository->create($attributes);
+
+        return new SuccessPayload(${{modelSingularCamel}});
+    }
+
+    public function validate(array $attributes)
+    {
+        return $this->{{modelSingularCamel}}Validator->with($attributes);
+    }
+
+    public function configureAttributes(OptionsResolver $resolver, $attributes)
+    {
+        $resolver->setDefined(array_keys($attributes));
+        $resolver->setDefaults([
+            'name' => $attributes['name'],
+        ]);
+    }
+}

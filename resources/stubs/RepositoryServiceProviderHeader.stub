@@ -1,0 +1,3 @@
+use ADR\{{domainName}}\Domain\Interfaces\Repositories\{{modelName}}Repository;
+use ADR\{{domainName}}\Domain\Repositories\{{modelName}}RepositoryEloquent;
+/*HEADER*/

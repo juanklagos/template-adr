@@ -1,0 +1,65 @@
+<?php
+
+namespace ADR\{{domainName}}\Action\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Services\{{modelName}}\{{modelName}}ViewService;
+use ADR\{{domainName}}\Responder\{{modelName}}\{{modelName}}ViewResponder;
+use ADR\Permission\Domain\Entities\Permission;
+use Illuminate\Http\Request;
+use Lorisleiva\Actions\Action;
+
+class {{modelName}}ViewAction extends Action
+{
+    public function authorize()
+    {
+        return $this->user()->can(Permission::{{modelPluralSnakeUpperCase}}_INDEX);
+    }
+
+    public function rules()
+    {
+        return [];
+    }
+
+    /**
+     * @param {{modelName}}ViewService $service,
+     * @param {{modelName}}ViewResponder $responder,
+     * @param Request $request
+     * @return array
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @OA\Get(
+     *     path="{{modelPluralSlug}}/{{{modelSingularSnake}}}",
+     *     summary="View {{modelName}}",
+     *     operationId="get{{modelName}}",
+     *     tags={"{{modelPlural}}"},
+     *     @OA\Parameter(
+     *         name="{{modelSingularSnake}}",
+     *         in="path",
+     *         description="{{modelSingularSnake}} id",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         ),
+     *         style="form"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/{{modelName}}Resource"
+     *         ),
+     *     ),
+     *     security={
+     *        {"passport": {}},
+     *     },
+     * )
+     */
+    public function handle(
+        {{modelName}}ViewService $service,
+        {{modelName}}ViewResponder $responder,
+        Request $request
+    ) {
+        ${{modelSingularCamel}} = $service->handle($this->validated(), $request->{{modelSingularSnake}});
+        return $responder->withResponse(${{modelSingularCamel}})->respond();
+    }
+}

@@ -1,0 +1,20 @@
+<?php
+
+namespace ADR\{{domainName}}\Responder\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Resources\{{modelName}}Resource;
+use App\Domain\Interfaces\ResponderInterface;
+use App\Domain\Payloads\ValidationFailedPayload;
+use App\Responder\BaseResponder;
+
+class {{modelName}}ListResponder extends BaseResponder implements ResponderInterface
+{
+    public function respond()
+    {
+        if ($this->response instanceof ValidationFailedPayload) {
+            return response()->json($this->response->getData(), $this->response->getStatus());
+        }
+
+        return {{modelName}}Resource::collection($this->response->getData());
+    }
+}

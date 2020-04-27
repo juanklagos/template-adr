@@ -1,0 +1,6 @@
+use ADR\{{domainName}}\Action\{{modelName}}\{{modelName}}ListAction;
+use ADR\{{domainName}}\Action\{{modelName}}\{{modelName}}ViewAction;
+use ADR\{{domainName}}\Action\{{modelName}}\{{modelName}}StoreAction;
+use ADR\{{domainName}}\Action\{{modelName}}\{{modelName}}UpdateAction;
+use ADR\{{domainName}}\Action\{{modelName}}\{{modelName}}DestroyAction;
+/*HEADER*/

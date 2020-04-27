@@ -1,0 +1,57 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Validators;
+
+use \Prettus\Validator\Contracts\ValidatorInterface;
+use \Prettus\Validator\LaravelValidator;
+
+/**
+ * Class {{modelName}}Validator.
+ *
+ * @package namespace ADR\{{domainName}}\Domain\Validators;
+ *
+ * @OA\RequestBody(
+ *     request="{{modelName}}",
+ *     description="{{modelName}} object",
+ *     required=true,
+ *     @OA\JsonContent(ref="#/components/schemas/{{modelName}}Validator"),
+ * )
+ *
+ * @OA\Schema(
+ *     title="{{modelName}}Post",
+ *     description="{{modelName}}Post",
+ *     @OA\Xml(
+ *         name="{{modelName}}Validator"
+ *     )
+ * )
+ */
+class {{modelName}}Validator extends LaravelValidator
+{
+    /**
+     * Validation Rules
+     *
+     * @var array
+     */
+    protected $rules = [
+        ValidatorInterface::RULE_CREATE => [
+            /**
+             * @OA\Property(
+             *     type="string",
+             *     property="name",
+             * )
+             */
+            'name' => [
+                'required',
+                'string',
+                'max:250',
+            ],
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'name' => [
+                'required',
+                'string',
+                'max:250',
+            ],
+        ],
+    ];
+}

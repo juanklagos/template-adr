@@ -1,0 +1,6 @@
+
+    const {{modelPluralSnakeUpperCase}}_INDEX = '{{modelPluralSnake}}_index';
+    const {{modelPluralSnakeUpperCase}}_STORE = '{{modelPluralSnake}}_create';
+    const {{modelPluralSnakeUpperCase}}_UPDATE = '{{modelPluralSnake}}_update';
+    const {{modelPluralSnakeUpperCase}}_DESTROY = '{{modelPluralSnake}}_destroy';
+/*BODY*/

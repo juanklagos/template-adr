@@ -1,0 +1,2 @@
+        $this->app->bind({{modelName}}Repository::class, {{modelName}}RepositoryEloquent::class);
+/*BODY*/

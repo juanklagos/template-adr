@@ -1,0 +1,15 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Interfaces\Repositories;
+
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+/**
+ * Interface {{modelName}}Repository.
+ *
+ * @package namespace ADR\{{domainName}}\Domain\Interfaces\Repositories;
+ */
+interface {{modelName}}Repository extends RepositoryInterface
+{
+    //
+}

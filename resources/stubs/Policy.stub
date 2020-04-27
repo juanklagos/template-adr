@@ -1,0 +1,71 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Entities\Policies;
+
+use ADR\{{domainName}}\Domain\Entities\{{modelName}};
+use ADR\User\Domain\Entities\User;
+use ADR\Permission\Domain\Entities\Permission;
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class {{modelName}}Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can list {{modelSingularSnake}}.
+     *
+     * @param  \ADR\User\Domain\Entities\User  $user
+     * @return mixed
+     */
+    public function index(User $user)
+    {
+        return $user->can(Permission::{{modelPluralSnakeUpperCase}}_INDEX);
+    }
+
+    /**
+     * Determine whether the user can view the {{modelSingularSnake}}.
+     *
+     * @param  \ADR\User\Domain\Entities\User  $user
+     * @param  \ADR\{{domainName}}\Domain\Entities\{{modelName}}  ${{modelSingularCamel}}
+     * @return mixed
+     */
+    public function view(User $user, {{modelName}} ${{modelSingularCamel}})
+    {
+        return $user->can(Permission::{{modelPluralSnakeUpperCase}}_INDEX);
+    }
+
+    /**
+     * Determine whether the user can store {{modelSingularSnake}}.
+     *
+     * @param  \ADR\User\Domain\Entities\User  $user
+     * @return mixed
+     */
+    public function store(User $user)
+    {
+        return $user->can(Permission::{{modelPluralSnakeUpperCase}}_STORE);
+    }
+
+    /**
+     * Determine whether the user can update the {{modelSingularSnake}}.
+     *
+     * @param  \ADR\User\Domain\Entities\User  $user
+     * @param  \ADR\{{domainName}}\Domain\Entities\{{modelName}}  ${{modelSingularCamel}}
+     * @return mixed
+     */
+    public function update(User $user, {{modelName}} ${{modelSingularCamel}})
+    {
+        return $user->can(Permission::{{modelPluralSnakeUpperCase}}_UPDATE);
+    }
+
+    /**
+     * Determine whether the user can delete the {{modelSingularSnake}}.
+     *
+     * @param  \ADR\User\Domain\Entities\User  $user
+     * @param  \ADR\{{domainName}}\Domain\Entities\{{modelName}}  ${{modelSingularCamel}}
+     * @return mixed
+     */
+    public function delete(User $user, {{modelName}} ${{modelSingularCamel}})
+    {
+        return $user->can(Permission::{{modelPluralSnakeUpperCase}}_DESTROY);
+    }
+}

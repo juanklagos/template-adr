@@ -1,0 +1,14 @@
+<?php
+
+namespace ADR\{{domainName}}\Responder\{{modelName}};
+
+use App\Domain\Interfaces\ResponderInterface;
+use App\Responder\BaseResponder;
+
+class {{modelName}}DestroyResponder extends BaseResponder implements ResponderInterface
+{
+    public function respond()
+    {
+        return response()->json(null, 204);
+    }
+}

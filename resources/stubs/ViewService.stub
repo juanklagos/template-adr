@@ -1,0 +1,24 @@
+<?php
+
+namespace ADR\{{domainName}}\Domain\Services\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Interfaces\Repositories\{{modelName}}Repository;
+use App\Domain\Interfaces\ServiceInterface;
+use App\Domain\Payloads\SuccessPayload;
+
+class {{modelName}}ViewService implements ServiceInterface
+{
+    protected ${{modelSingularCamel}}Repository;
+
+    public function __construct({{modelName}}Repository ${{modelSingularCamel}}Repository)
+    {
+        $this->{{modelSingularCamel}}Repository = ${{modelSingularCamel}}Repository;
+    }
+
+    public function handle($attributes = [], int $id = null)
+    {
+        ${{modelSingularCamel}} = $this->{{modelSingularCamel}}Repository->find($id);
+
+        return new SuccessPayload(${{modelSingularCamel}});
+    }
+}

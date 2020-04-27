@@ -1,0 +1,8 @@
+    Route::prefix('{{modelPluralSlug}}')->group(function () {
+        Route::get('/', {{modelName}}ListAction::class);
+        Route::post('/', {{modelName}}StoreAction::class);
+        Route::get('/{{{modelSingularSnake}}}', {{modelName}}ViewAction::class);
+        Route::put('/{{{modelSingularSnake}}}', {{modelName}}UpdateAction::class);
+        Route::delete('/{{{modelSingularSnake}}}', {{modelName}}DestroyAction::class);
+    });
+/*BODY*/

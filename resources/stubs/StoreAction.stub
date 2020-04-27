@@ -1,0 +1,51 @@
+<?php
+
+namespace ADR\{{domainName}}\Action\{{modelName}};
+
+use ADR\{{domainName}}\Domain\Services\{{modelName}}\{{modelName}}StoreService;
+use ADR\{{domainName}}\Responder\{{modelName}}\{{modelName}}StoreResponder;
+use ADR\Permission\Domain\Entities\Permission;
+use Lorisleiva\Actions\Action;
+
+class {{modelName}}StoreAction extends Action
+{
+    public function authorize()
+    {
+        return $this->user()->can(Permission::{{modelPluralSnakeUpperCase}}_STORE);
+    }
+
+    public function rules()
+    {
+        return [];
+    }
+
+    /**
+     * @param {{modelName}}StoreService $service
+     * @param {{modelName}}StoreResponder $responder
+     * @return \ADR\{{domainName}}\Domain\Resources\{{modelName}}Resource|\Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @OA\Post(
+     *     path="{{modelPluralSlug}}",
+     *     summary="Store {{modelName}}",
+     *     operationId="post{{modelName}}",
+     *     tags={"{{modelPlural}}"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @OA\JsonContent(
+     *             ref="#/components/schemas/{{modelName}}Resource"
+     *         ),
+     *     ),
+     *     requestBody={"$ref": "#/components/requestBodies/{{modelName}}"},
+     *     security={
+     *        {"passport": {}},
+     *     },
+     * )
+     */
+    public function handle({{modelName}}StoreService $service, {{modelName}}StoreResponder $responder)
+    {
+        ${{modelSingularCamel}} = $service->handle($this->validated());
+        return $responder->withResponse(${{modelSingularCamel}})->respond();
+    }
+}
